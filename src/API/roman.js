@@ -36,9 +36,20 @@ const isValidRepetition = (stringRomans) => {
   const arr = stringRomans.match(regex);
   const arrOne = arr.filter((e) => romans.indexOf(e[0]) !== -1);
 
-  const mapFinal = arrOne.map((n) => n.length < 4);
+  let mapFinal = arrOne.map((n) => n.length < 4);
 
-  const isValid = mapFinal.every((e) => e === true);
+  let isValid = mapFinal.every((e) => e === true);
+
+  if (isValid) {
+    const arrayRoman = stringRomans.split('').sort().join('');
+    const arr2 = arrayRoman.match(regex);
+    const arrTwo = arr2.filter((e) => romans.indexOf(e[0]) !== -1);
+
+    mapFinal = arrTwo.map((n) => n.length < 5);
+
+    isValid = mapFinal.every((e) => e === true);
+  }
+
   mapFinal.filter((e, index) => {
     if (e === false) errorLetter[0] = arrOne[index].charAt(0);
     return null;
